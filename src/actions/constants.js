@@ -1,0 +1,1 @@
+export const SET_QUEUE_MESSAGE = "SET_QUEUE_MESSAGE";
