@@ -3,9 +3,9 @@ import { Provider } from "react-redux";
 import logo from './logo.svg';
 import './App.css';
 
-const App = () => {
+const App = (props) => {
   return (
-    <Provider store={this.props.store}>
+    <Provider store={props.store}>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
