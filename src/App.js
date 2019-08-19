@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <Provider store={this.props.store}>
       <div className="App">
