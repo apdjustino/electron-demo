@@ -1,8 +1,10 @@
 const express = require("express");
 const msmq = require("node-msmq");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.json({limit: '50mb'}));
 const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, "build")));
