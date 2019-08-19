@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from 'react';
 import { Provider } from "react-redux";
+import { Button } from "semantic-ui-react";
 import logo from './logo.svg';
 import './App.css';
 
@@ -21,6 +23,11 @@ const App = (props) => {
             Learn React
           </a>
         </header>
+        <Button onClick={() => {
+          axios.post('/api/sendmessage').then(() => {
+            alert('sent message')
+          })
+        }}>Send Test Message</Button>
       </div>
     </Provider>
     
