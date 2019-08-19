@@ -3,7 +3,7 @@ import React from 'react';
 import { connect, Provider } from "react-redux";
 import { Button, Grid, Input } from "semantic-ui-react";
 import  * as messageActions from "./actions/messageActions";
-import logo from './logo.svg';
+import logo from './PolyPortLogo.png';
 import './App.css';
 
 class App extends React.Component {
@@ -31,22 +31,12 @@ class App extends React.Component {
     return (
       <Provider store={this.props.store}>
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
+          <header>
+            <img src={logo} alt="logo" />
           </header>
-          <Input onChange={(e) => {this.handleChangeInput(e)}}/>
-          <Button onClick={() => {this.handleSendMessage()}}>Send Test Message</Button>
+          <Input onChange={(e) => {this.handleChangeInput(e)}} value={this.state.messageToSend}/>
+          <Button onClick={() => {this.handleSendMessage()}}>Send Message to MSMQ</Button>
+          <h3>Messages sent to MSMQ:</h3>
           <Grid celled>
             {this.props.messageList.map(row => (
               <Grid.Row>
