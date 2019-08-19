@@ -1,7 +1,8 @@
 import axios from "axios";
 import React from 'react';
-import { Provider } from "react-redux";
+import { connect, Provider } from "react-redux";
 import { Button, Grid, Input } from "semantic-ui-react";
+import  * as messageActions from "./actions/messageActions";
 import logo from './logo.svg';
 import './App.css';
 
@@ -9,8 +10,7 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      messageToSend: "",
-      sentMessages: []
+      messageToSend: ""
     }
   }
   
@@ -20,7 +20,8 @@ class App extends React.Component {
 
   handleSendMessage() {
     axios.post('/api/sendmessage', {message: this.state.messageToSend}).then(() => {
-      this.setState({sentMessages: [this.state.messageToSend, ...this.state.sentMessages]})
+      const updatedMessageList = [this.state.messageToSend, ...this.props.messageList]
+      this.props.setMessageList(updatedMessageList)
       this.setState({messageToSend: ""})
     })
   }
@@ -47,7 +48,7 @@ class App extends React.Component {
           <Input onChange={(e) => {this.handleChangeInput(e)}}/>
           <Button onClick={() => {this.handleSendMessage()}}>Send Test Message</Button>
           <Grid celled>
-            {this.state.sentMessages.map(row => (
+            {this.props.messageList.map(row => (
               <Grid.Row>
                 <Grid.Column width={16}>
                   <h4>{row}</h4>
@@ -61,4 +62,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    messageList: state.queueForm.messageList
+  }
+}
+
+export default connect(mapStateToProps, messageActions)(App);
