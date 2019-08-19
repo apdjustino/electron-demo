@@ -12,7 +12,7 @@ app.get("/*", function(req, res) {
 
 app.post("/api/sendmessage", function(req, res) {
     const queue = msmq.openOrCreateQueue('.\\Private$\\TestQueue')
-    queue.send("Hello from Node!")
+    queue.send(req.body.message)
     res.json({"msgSent": true})
 })
 
